@@ -1,0 +1,4 @@
+jdbcUrl = jdbc:mysql://192.168.11.10:3307/zplan?characterEncoding=GBK&zeroDateTimeBehavior=convertToNull
+user = zplan
+password =123456
+devMode = true

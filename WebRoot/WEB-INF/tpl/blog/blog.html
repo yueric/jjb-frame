@@ -1,0 +1,37 @@
+<#include "../common/_header.html"/>
+<#include "../common/_nav.html"/>
+<#include "../common/_mmenu.html"/>
+<#include "../common/_siderbar.html"/>
+<#include "../common/_premark.html"/>
+<script type="text/javascript" src="lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="lib/DataTables-1.9.4/media/js/jquery.dataTables.bootstrap.js"></script>
+<h2 style="margin-bottom: -1.75em;">Blog 管理</h2><br/>
+<!-- a href="/blog/add"><button class="btn btn-success">创建Blog</button></a> -->
+<div class="table_box">
+	<table class="table table-first-column-number">
+		 <thead>
+		    <tr>
+		      <th>id</th>
+		      <th>标题</th>
+		      <th>操作&nbsp;&nbsp; <a href="/blog/add">创建Blog</a></th>
+		    </tr>
+		  </thead>
+    	  <tbody>
+			<#list blogPage.getList() as x>
+			<tr>
+				<td style="text-align:left;">${x.id}</td>
+				<td style="text-align:left;">${x.title}</td>
+				<td style="text-align:left;">
+					&nbsp;&nbsp;<a href="/blog/delete/${x.id}">删除</a>
+					&nbsp;&nbsp;<a href="/blog/edit/${x.id}">修改</a>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+</div>
+<#include "../common/_page.html" />
+<@paginate currentPage=blogPage.pageNumber totalPage=blogPage.totalPage actionUrl="/blog/" />
+
+<#include "../common/_mark.html"/>
+<#include "../common/_foot.html"/>

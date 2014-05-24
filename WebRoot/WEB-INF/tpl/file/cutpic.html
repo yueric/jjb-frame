@@ -1,0 +1,124 @@
+<#include "../common/_header.html"/>
+<#include "../common/_nav.html"/>
+<#include "../common/_mmenu.html"/>
+<#include "../common/_siderbar.html"/>
+<#include "../common/_premark.html"/>
+<script type="text/javascript">
+$(document).ready(function() {
+	// Create variables (in this scope) to hold the API and image size
+    var jcrop_api,
+        boundx,
+        boundy,
+
+        // Grab some information about the preview pane
+        $preview = $('#preview-pane'),
+        $pcnt = $('#preview-pane .preview-container'),
+        $pimg = $('#preview-pane .preview-container img'),
+
+        xsize = $pcnt.width(),
+        ysize = $pcnt.height();
+    
+    console.log('init',[xsize,ysize]);
+    $('#target').Jcrop({
+      onChange: updatePreview,
+      onSelect: updatePreview,
+      aspectRatio: xsize / ysize
+    },function(){
+      // Use the API to get the real image size
+      var bounds = this.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+      // Store the API in the jcrop_api variable
+      jcrop_api = this;
+
+      // Move the preview into the jcrop container for css positioning
+      $preview.appendTo(jcrop_api.ui.holder);
+    });
+
+    function updatePreview(c)
+    {
+    	$("#x").val(Math.round(c.x));
+	      $("#y").val(Math.round(c.y));
+	      $("#w").val(Math.round(c.w));
+	      $("#h").val(Math.round(c.h));
+      if (parseInt(c.w) > 0)
+      {
+        var rx = xsize / c.w;
+        var ry = ysize / c.h;
+
+        $pimg.css({
+          width: Math.round(rx * boundx) + 'px',
+          height: Math.round(ry * boundy) + 'px',
+          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+          marginTop: '-' + Math.round(ry * c.y) + 'px'
+        });
+      }
+    };
+	
+   
+});
+
+function xpic(){
+	alert("x:"+$("#x").val()+";y:"+$("#y").val()+";w:"+$("#w").val()+";h:"+$("#h").val());
+	$("#mainform").submit();
+}
+</script>
+<style type="text/css">
+
+/* Apply these styles only when #preview-pane has
+   been placed within the Jcrop widget */
+.jcrop-holder #preview-pane {
+  display: block;
+  position: absolute;
+  z-index: 2000;
+  top: 10px;
+  right: -280px;
+  padding: 6px;
+  border: 1px rgba(0,0,0,.4) solid;
+  background-color: white;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+#preview-pane .preview-container {
+  width: 250px;
+  height: 170px;
+  overflow: hidden;
+}
+
+</style>
+	<script src="/lib/jcrop/js/jquery.Jcrop.js"></script>
+	<link rel="stylesheet" href="/lib/jcrop/css/jquery.Jcrop.css" type="text/css" />
+	<h2>圖片裁剪</h2>
+         <img src="/upload/uploadFiles/1f0f79a8d6d6e08976d7fb530dafcfd4.jpg" id="target" alt="[Jcrop Example]" />
+
+		  <div id="preview-pane">
+		    <div class="preview-container">
+		      <img src="/upload/uploadFiles/1f0f79a8d6d6e08976d7fb530dafcfd4.jpg" class="jcrop-preview" alt="Preview" />
+		    </div>
+		  </div>
+
+            
+        <div>
+	        <form id="mainform" name="mainform" action="/file/resizimg" method="post" id="crop_form">
+	             <input type="hidden" id="bigImage" name="bigImage"/>
+	              <input type="hidden" id="x" name="x" />
+	              <input type="hidden" id="y" name="y" />
+	              <input type="hidden" id="w" name="w" />
+	              <input type="hidden" id="h" name="h" />
+	              <P><input class="btn btn-success" type="button" value="确认" id="crop_submit" onclick="xpic()"/></P>
+	        </form>
+       </div>
+	
+
+<#include "../common/_mark.html"/>
+<#include "../common/_foot.html"/>

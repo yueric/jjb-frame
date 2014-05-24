@@ -1,0 +1,56 @@
+<#include "../common/_header.html"/>
+<#include "../common/_nav.html"/>
+<#include "../common/_mmenu.html"/>
+<#include "../common/_siderbar.html"/>
+<#include "../common/_premark.html"/>
+<script type="text/javascript" src="lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="lib/DataTables-1.9.4/media/js/jquery.dataTables.bootstrap.js"></script>
+<h2 style="margin-bottom: -1.75em;">Graffitiinfo管理</h2><br/>
+<div class="table_box">
+	<table class="table table-first-column-number">
+		 <thead>
+		    <tr>
+		      <th>ID</th>
+		      <th>城市</th>
+		      <th>国家</th>
+		      <th>语言</th>
+		      <th>坐标lat</th>
+		      <th>坐标lon</th>
+		      <th>信息类型</th>
+		      <th>坐标精度</th>
+		      <th>昵称</th>
+		      <th>openid</th>
+		      <th>省市</th>
+		      <th>性别</th>
+		      <th>操作&nbsp;&nbsp; <a href="/graffitiinfo/add">创建Graffitiinfo</a></th>
+		    </tr>
+		  </thead>
+    	  <tbody>
+			<#list graffitiinfoPage.getList() as x>
+			<tr>
+				<td style="text-align:left;">${x.id!}</td>
+				<td style="text-align:left;">${x.city!}</td>
+				<td style="text-align:left;">${x.country!}</td>
+				<td style="text-align:left;">${x.language!}</td>
+				<td style="text-align:left;">${x.latitude!}</td>
+				<td style="text-align:left;">${x.longitude!}</td>
+				<td style="text-align:left;">${x.msgType!}</td>
+				<td style="text-align:left;">${x.myPrecision!}</td>
+				<td style="text-align:left;">${x.nickname!}</td>
+				<td style="text-align:left;">${x.openId!}</td>
+				<td style="text-align:left;">${x.province!}</td>
+				<td style="text-align:left;">${x.sex!}</td>
+				<td style="text-align:left;">
+					&nbsp;&nbsp;<a href="/graffitiinfo/delete/${x.id}">删除</a>
+					&nbsp;&nbsp;<a href="/graffitiinfo/edit/${x.id}">修改</a>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+</div>
+<#include "../common/_page.html" />
+<@paginate currentPage=graffitiinfoPage.pageNumber totalPage=graffitiinfoPage.totalPage actionUrl="/graffitiinfo/" />
+
+<#include "../common/_mark.html"/>
+<#include "../common/_foot.html"/>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>  
+  
+<html>  
+  
+<head>  
+    <meta  http-equiv="Content-Type"  content="text/html;  charset=utf-8"  />  
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">  
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css">  
+    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>  
+    <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>  
+</head>  
+  
+<body>  
+  
+<div data-role="page">  
+  
+    <div data-role="header">  
+        <h1>演示上传文件</h1>  
+    </div><!-- /header -->  
+  
+    <div data-role="content">  
+        <form action="file/uploadFile" method="post" enctype="multipart/form-data" data-ajax="false">  
+        <label for="file">文件名称</label>  
+        <input type="file" name="picfile" id="file" />   
+        <br />  
+        <input type="submit" name="submit" value="上传！" />  
+        </form>  
+    </div><!-- /content -->  
+  
+    <div data-role="footer">  
+        <h4>存到到文件夹</h4>  
+    </div><!-- /footer -->  
+  
+</div><!-- /page -->  
+</body>  
+  
+</body>  
+</html>  
