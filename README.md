@@ -7,4 +7,4 @@
 
 ###使用
 	按照jfianl约定，项目发布在根上，默认引导会到登陆页面，不过没做登陆限制
-	生成代码copy进项目后，可以直接访问 http://[localhost]:[port]/表面
+	生成代码copy进项目后，可以直接访问 http://[localhost]:[port]/表名
